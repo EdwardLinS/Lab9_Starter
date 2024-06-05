@@ -23,10 +23,15 @@ form.addEventListener('submit', e => {
 let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
 
 // Start your code here
-    // You may move this JS to another file if you wish
-
-// Start your code here
 // You may move this JS to another file if you wish
+
+class DivideByZeroError extends Error {
+    constructor(message) {
+        super(message);
+        this.name = "DBZ Error";
+    }
+}
+
 errorBtns[0].onclick = () => {
     console.log("Console Log Demo");
 }
@@ -44,7 +49,7 @@ errorBtns[3].onclick = () => {
 }
 
 errorBtns[4].onclick = () => {
-    console.assert(false);
+    console.assert(2 === "two");
 }
 
 errorBtns[5].onclick = () => {
@@ -81,13 +86,6 @@ errorBtns[12].onclick = () => {
 
 errorBtns[13].onclick = () => {
     console.trace();
-}
-
-class DivideByZeroError extends Error {
-    constructor(message) {
-        super(message);
-        this.name = "DBZ Error";
-    }
 }
 
 errorBtns[14].onclick = () => {
