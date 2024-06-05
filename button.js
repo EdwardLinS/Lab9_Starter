@@ -5,7 +5,19 @@ form.addEventListener('submit', e => {
     let firstNum = document.querySelector('#first-num').value;
     let secondNum = document.querySelector('#second-num').value;
     let operator = document.querySelector('#operator').value;
-    output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+
+    try {
+        if (operator === '/' && secondNum == 0) {
+            throw new DivideByZeroError('Cannot divide by zero');
+        } 
+
+        output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+    } catch (error) {
+        console.error(error);
+    } finally {
+        console.log("Finally, evalute either way");
+        output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`)
+    }
 });
 
 let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
@@ -71,33 +83,17 @@ errorBtns[13].onclick = () => {
     console.trace();
 }
 
-
-class GetElemError extends Error {
+class DivideByZeroError extends Error {
     constructor(message) {
         super(message);
-        this.name = "GetElemError";
+        this.name = "DBZ Error";
     }
 }
 
 errorBtns[14].onclick = () => {
-    const changeElemHTML = (name, text) => {
+    document.getElementById("nonexistent").innerHTML = "";
+}
 
-        const elem = document.getElementById(name);
-
-        if (elem == null) {
-            throw new GetElemError(`Element with name '${name}' does not exist!`);
-        }
-        elem.innerHTML = text;
-    }
-
-    try {
-        changeElemHTML("nonexistent", "Hello");
-    } catch (err) {
-        if (err instanceof GetElemError) {
-            console.log("WEE WOO ERROR ERROR");
-            console.error(`${err.name}: ${err.message}`);
-        } else {
-            throw err;
-        }
-    }
+window.onerror = function() {
+    console.log("THERE'S A GLOBAL ERROR");
 }
