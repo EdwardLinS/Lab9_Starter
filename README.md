@@ -1,4 +1,5 @@
 # Lab 9 - Starter
 
 Edward Lin
-http://edward.techkyra.com/Lab9_Starter/
+
+https://edwardlins.github.io/Lab9_Starter/
